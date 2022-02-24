@@ -22,7 +22,7 @@ type gameEventService struct {
 
 func NewEvent() gameEventService {
 	return &gameEventService{
-		gameEvents: []model.gameEvent{},
+		gameEvents: []model.GameEvent{},
 	}
 }
 
