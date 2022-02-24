@@ -20,7 +20,7 @@ type gameEventService struct {
 	gameEvents []model.GameEvent
 }
 
-func NewEvent() gameEventService {
+func NewEvent() GameEventService {
 	return &gameEventService{
 		gameEvents: []model.GameEvent{},
 	}
