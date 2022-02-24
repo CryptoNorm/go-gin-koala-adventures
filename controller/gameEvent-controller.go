@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type gameEventController interface {
+type GameEventController interface {
 	FindByPlayer(ctx *gin.Context) []model.GameEvent
 	FindAll(ctx *gin.Context) []model.GameEvent
 	Save(ctx *gin.Context) model.GameEvent
@@ -16,18 +16,18 @@ type gameEventController struct {
 	service service.GameEventService
 }
 
-func NewEvent(service service.gameEventService) gameEventController {
+func NewEvent(service service.GameEventService) GameEventController {
 	return &gameEventController{
 		service: service,
 	}
 }
 
-func (c *gameEventController) FindAll(ctx *gin.Context) []model.gGameEvent {
+func (c *gameEventController) FindAll(ctx *gin.Context) []model.GameEvent {
 	return c.service.FindAll()
 }
 
 func (c *gameEventController) Save(ctx *gin.Context) model.GameEvent {
-	var gameEvent model.gameEvent
+	var gameEvent model.GameEvent
 
 	ctx.BindJSON(&gameEvent)
 
@@ -35,8 +35,8 @@ func (c *gameEventController) Save(ctx *gin.Context) model.GameEvent {
 	return gameEvent
 }
 
-func (c *gameEventController) FindByVin(ctx *gin.Context) []model.gameEvent {
-	vin := ctx.Param("vin")
+func (c *gameEventController) FindByPlayer(ctx *gin.Context) []model.GameEvent {
+	player := ctx.Param("player")
 
-	return c.service.FindByVin(vin)
+	return c.service.FindByPlayer(player)
 }

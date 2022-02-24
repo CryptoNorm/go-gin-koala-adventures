@@ -17,8 +17,8 @@ func main() {
 	// Enable CORS for requests UI domain (port)
 	router.Use(cors.Default())
 
-	router.GET("/gameEvents/:vin", func(ctx *gin.Context) {
-		ctx.JSON(200, gameEventController.FindByVin(ctx))
+	router.GET("/gameEvents/:player", func(ctx *gin.Context) {
+		ctx.JSON(200, gameEventController.FindByPlayer(ctx))
 	})
 
 	router.GET("/gameEvents", func(ctx *gin.Context) {

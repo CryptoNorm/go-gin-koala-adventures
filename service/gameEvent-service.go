@@ -6,13 +6,14 @@ import (
 	"os"
 	"time"
 
+	"github.com/CryptoNorm/go-gin-koala-adventures-api/model"
 	"github.com/hashgraph/hedera-sdk-go/v2"
 )
 
 type GameEventService interface {
 	Save(model.GameEvent) model.GameEvent
 	FindAll() []model.GameEvent
-	FindByVin(string) []model.GameEvent
+	FindByPlayer(string) []model.GameEvent
 }
 
 type gameEventService struct {
