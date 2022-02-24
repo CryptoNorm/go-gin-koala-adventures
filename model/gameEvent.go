@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-type gameEvent struct {
+type GameEvent struct {
 	Id        int16     `json:"id"`
 	Player    string    `json:"player"`
 	GameLevel int8      `json:"game_level"`

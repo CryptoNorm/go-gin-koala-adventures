@@ -9,14 +9,14 @@ import (
 	"github.com/hashgraph/hedera-sdk-go/v2"
 )
 
-type gameEventService interface {
-	Save(model.gameEvent) model.gameEvent
-	FindAll() []model.gameEvent
-	FindByVin(string) []model.gameEvent
+type GameEventService interface {
+	Save(model.GameEvent) model.GameEvent
+	FindAll() []model.GameEvent
+	FindByVin(string) []model.GameEvent
 }
 
 type gameEventService struct {
-	gameEvents []model.gameEvent
+	gameEvents []model.GameEvent
 }
 
 func NewEvent() gameEventService {
@@ -25,7 +25,7 @@ func NewEvent() gameEventService {
 	}
 }
 
-func (service *gameEventService) Save(gameEvent model.gameEvent) model.gameEvent {
+func (service *gameEventService) Save(gameEvent model.GameEvent) model.GameEvent {
 	var client = GetHederaClient()
 
 	myTopicId, err := hedera.TopicIDFromString(os.Getenv("GAME_EVENT_TOPIC_ID"))
@@ -69,7 +69,7 @@ func (service *gameEventService) Save(gameEvent model.gameEvent) model.gameEvent
 	return gameEvent
 }
 
-func (service *gameEventService) FindByVin(searchVin string) []model.gameEvent {
+func (service *gameEventService) FindByPlayer(searchPlayer string) []model.GameEvent {
 	var client = GetHederaClient()
 
 	myTopicId, err := hedera.TopicIDFromString(os.Getenv("GAME_EVENT_TOPIC_ID"))
@@ -78,13 +78,13 @@ func (service *gameEventService) FindByVin(searchVin string) []model.gameEvent {
 	}
 	fmt.Printf("The topic ID = %v\n", myTopicId)
 
-	var results []model.gameEvent
+	var results []model.GameEvent
 
 	sub, err := hedera.NewTopicMessageQuery().
 		SetTopicID(myTopicId).
 		SetStartTime(time.Unix(0, 0)).
 		Subscribe(client, func(message hedera.TopicMessage) {
-			var ma model.gameEvent
+			var ma model.GameEvent
 			err := json.Unmarshal(message.Contents, &ma)
 			if err != nil {
 				println(err.Error(), ": error Unmarshalling")
@@ -110,6 +110,6 @@ func (service *gameEventService) FindByVin(searchVin string) []model.gameEvent {
 	return results
 }
 
-func (service *gameEventService) FindAll() []model.gameEvent {
-	return service.FindByVin("")
+func (service *gameEventService) FindAll() []model.GameEvent {
+	return service.FindByPlayer("")
 }

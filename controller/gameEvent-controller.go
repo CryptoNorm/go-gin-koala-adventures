@@ -1,17 +1,19 @@
 package controller
 
 import (
+	"github.com/CryptoNorm/go-gin-koala-adventures-api/model"
+	"github.com/CryptoNorm/go-gin-koala-adventures-api/service"
 	"github.com/gin-gonic/gin"
 )
 
 type gameEventController interface {
-	FindByPlayer(ctx *gin.Context) []model.gameEvent
-	FindAll(ctx *gin.Context) []model.gameEvent
-	Save(ctx *gin.Context) model.gameEvent
+	FindByPlayer(ctx *gin.Context) []model.GameEvent
+	FindAll(ctx *gin.Context) []model.GameEvent
+	Save(ctx *gin.Context) model.GameEvent
 }
 
 type gameEventController struct {
-	service service.gameEventService
+	service service.GameEventService
 }
 
 func NewEvent(service service.gameEventService) gameEventController {
@@ -20,11 +22,11 @@ func NewEvent(service service.gameEventService) gameEventController {
 	}
 }
 
-func (c *gameEventController) FindAll(ctx *gin.Context) []model.gameEvent {
+func (c *gameEventController) FindAll(ctx *gin.Context) []model.gGameEvent {
 	return c.service.FindAll()
 }
 
-func (c *gameEventController) Save(ctx *gin.Context) model.gameEvent {
+func (c *gameEventController) Save(ctx *gin.Context) model.GameEvent {
 	var gameEvent model.gameEvent
 
 	ctx.BindJSON(&gameEvent)

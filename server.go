@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/CryptoNorm/go-gin-koala-adventures/controller"
-	"github.com/CryptoNorm/go-gin-koala-adventures/service"
+	"github.com/CryptoNorm/go-gin-koala-adventures-api/controller"
+	"github.com/CryptoNorm/go-gin-koala-adventures-api/service"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
