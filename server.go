@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	gameEventService    service.gameEventService       = service.NewEvent()
-	gameEventController controller.gameEventController = controller.NewEvent(gameEventService)
+	gameEventService    service.GameEventService       = service.NewEvent()
+	gameEventController controller.GameEventController = controller.NewEvent(gameEventService)
 )
 
 func main() {
